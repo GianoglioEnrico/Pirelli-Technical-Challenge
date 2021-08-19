@@ -15,7 +15,7 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 
 import socketIOClient from "socket.io-client";
 
-const ENDPOINT = "http://localhost:4001";
+const ENDPOINT = "/";
 const socket = socketIOClient(ENDPOINT);
 
 const useStyles = makeStyles({
@@ -45,7 +45,7 @@ const useStyles = makeStyles({
 export default function DataTable() {
   const classes = useStyles();
   const [measurements, setmeasurements] = useState([]);
-  const [filtered, setFiltered] = useState([]);
+
   const [filtering, setFiltering] = useState(false);
   const [car, setCar] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
@@ -56,18 +56,15 @@ export default function DataTable() {
     setCar(e.target.value);
     if (e.target.value === "showAllCars") setFiltering(false);
     else {
-      fetch(`http://localhost:4001/filter?car=${car}`)
+      fetch(`/filter?car=${car}`)
         .then((res) => res.json())
         .then((response) => {
-          console.log(response);
-          setFiltered(response.data);
           setFiltering(true);
         });
     }
   };
-  console.log(filtered);
+
   let fi = measurements.filter((f) => f.Car_id === car);
-  console.log(car);
 
   const handleClose = () => {
     setOpen(false);

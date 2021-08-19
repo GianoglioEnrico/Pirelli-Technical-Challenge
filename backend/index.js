@@ -1,4 +1,4 @@
-// IMPORTS
+// Import Statements
 const express = require("express");
 const http = require("http");
 const csv = require("csv-parser");
@@ -6,15 +6,6 @@ const cors = require("cors");
 const fs = require("fs");
 
 const app = express();
-
-// MIDDLEWARE
-app.use(cors());
-app.use(express.json());
-
-const port = process.env.PORT || 4001;
-let measurement = [];
-let i = 0;
-let interval;
 const server = http.createServer(app);
 const io = require("socket.io")(server, {
   cors: {
@@ -22,11 +13,27 @@ const io = require("socket.io")(server, {
   },
 });
 
+// MIDDLEWARE
+app.use(cors());
+app.use(express.json());
+
+const port = process.env.PORT || 4001;
+
+let measurement = [];
+let i = 0;
+let interval;
+let response;
+
+// Reading CSV file and saving data
 fs.createReadStream("./mycsv.csv")
   .pipe(csv())
   .on("data", (data) => {
-    measurement.push(data);
+    if (Number(data.Press) > 0 && Number(data.Omega)) {
+      measurement.push(data);
+    }
   });
+
+// Socket Connection
 io.on("connection", (socket) => {
   console.log("New client connected");
   if (interval) {
@@ -40,7 +47,7 @@ io.on("connection", (socket) => {
     clearInterval(interval);
   });
 });
-let response;
+
 const getApiAndEmit = (socket) => {
   response = measurement[i++];
   if (response && Number(response.Omega) > 0 && Number(response.Press) > 0) {
@@ -48,6 +55,7 @@ const getApiAndEmit = (socket) => {
     socket.emit("FromAPI", response);
   }
 };
+
 app.get("/filter", (req, res) => {
   const filters = req.query;
   const filteredCar = measurement.filter((measure) => {
@@ -56,4 +64,6 @@ app.get("/filter", (req, res) => {
 
   res.json(filteredCar);
 });
+
+// Server Started
 server.listen(port, () => console.log(`Listening on port ${port}`));
