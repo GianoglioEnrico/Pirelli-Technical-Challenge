@@ -57,9 +57,9 @@ const getApiAndEmit = (socket) => {
 };
 
 app.get("/filter", (req, res) => {
-  const filters = req.query;
+  const queryFilters = req.query;
   const filteredCar = measurement.filter((measure) => {
-    return filters.car.includes(measure.Car_id);
+    return queryFilters.car.includes(measure.Car_id);
   });
 
   res.json(filteredCar);

@@ -1,6 +1,7 @@
 import "./App.css";
-import Header from "./components/Header";
-import DataTable from "./components/Table";
+import Header from "./containers/Header";
+import DataTable from "./containers/DataTable";
+
 function App() {
   return (
     <div className="App">
