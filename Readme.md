@@ -5,7 +5,7 @@ The project is a real-time web application showing informations about tyres thro
 
 ![image](https://github.com/GianoglioEnrico/Pirelli-Technical-Challenge/blob/main/web-app-image.png)
 
-Here you try the app: https://pirelli-technical-challenge.herokuapp.com/
+Try the app: https://pirelli-technical-challenge.herokuapp.com/
 
 #### Prerequisites
 
