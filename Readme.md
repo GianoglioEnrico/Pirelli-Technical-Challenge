@@ -21,6 +21,8 @@ npm install
 npm start
 ```
 
+Your server will run on http://localhost:4001
+
 ## Frontend Installation
 
 ```bash
@@ -28,3 +30,5 @@ cd frontend
 npm install
 npm start
 ```
+
+You should see the frontend of the application running on will run on http://localhost:3000
