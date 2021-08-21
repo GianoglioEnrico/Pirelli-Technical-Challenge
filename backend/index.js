@@ -16,7 +16,7 @@ const io = require("socket.io")(server, {
 // MIDDLEWARE
 app.use(cors());
 app.use(express.json());
-
+app.use(express.static("build"));
 const port = process.env.PORT || 4001;
 
 let measurement = [];
@@ -25,7 +25,7 @@ let interval;
 let response;
 
 // Reading CSV file and saving data
-fs.createReadStream("./mycsv.csv")
+fs.createReadStream("./data_measurements_finals.csv")
   .pipe(csv())
   .on("data", (data) => {
     if (Number(data.Press) > 0 && Number(data.Omega)) {
