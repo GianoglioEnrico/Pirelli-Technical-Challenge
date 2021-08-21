@@ -66,12 +66,13 @@ const DataTable = () => {
 
   return (
     <div className={classes.root}>
-      <CarsFilter
-        cars={cars}
-        handleCarFiltering={handleCarFiltering}
-        carsFiltered={carsFiltered}
-      />
-
+      {!errorMessage && (
+        <CarsFilter
+          cars={cars}
+          handleCarFiltering={handleCarFiltering}
+          carsFiltered={carsFiltered}
+        />
+      )}
       {!errorMessage && !filtering && <MainTable measurements={measurements} />}
 
       {filtering &&
@@ -80,8 +81,8 @@ const DataTable = () => {
         ))}
       {!errorMessage && measurements.length < 1 && <LoadProgress />}
       {errorMessage && (
-        <Typography color="inherit" className={classes.errorMessage}>
-          {errorMessage}
+        <Typography variant="h4" gutterBottom className={classes.errorMessage}>
+          {errorMessage}:(
         </Typography>
       )}
     </div>

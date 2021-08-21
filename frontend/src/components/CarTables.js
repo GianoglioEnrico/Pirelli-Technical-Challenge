@@ -49,10 +49,10 @@ const CarTables = (props) => {
             <TableHead>
               <TableRow>
                 <TableCell>Position</TableCell>
-                <TableCell align="right">Last Detected Temperature</TableCell>
-                <TableCell align="right">Last Detected Omega</TableCell>
-                <TableCell align="right">Last Detected Speed</TableCell>
-                <TableCell align="right">Last Detected Pressure</TableCell>
+                <TableCell align="right">Temperature(Last Detected)</TableCell>
+                <TableCell align="right">Omega(Last Detected)</TableCell>
+                <TableCell align="right">Speed(Last Detected)</TableCell>
+                <TableCell align="right">Pressure(Last Detected)</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
