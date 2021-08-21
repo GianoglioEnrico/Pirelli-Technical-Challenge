@@ -3,7 +3,7 @@
 Project developed for Pirelli's technical interview.
 The project is a real-time web application showing informations about tyres through sensors put on diffferent cars.
 
-![image](https://github.com/GianoglioEnrico/Pirelli-Technical-Challenge/web-app-image.png)
+![image](https://github.com/GianoglioEnrico/Pirelli-Technical-Challenge/blob/main/web-app-image.png)
 
 Here you try the app: https://pirelli-technical-challenge.herokuapp.com/
 
