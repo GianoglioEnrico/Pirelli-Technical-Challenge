@@ -1,10 +1,10 @@
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
-import InputLabel from "@material-ui/core/InputLabel";
 import Input from "@material-ui/core/Input";
 import MenuItem from "@material-ui/core/MenuItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import Checkbox from "@material-ui/core/Checkbox";
+import { Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
 // Component Styling
@@ -19,21 +19,30 @@ const CarsFilter = (props) => {
   let { cars, handleCarFiltering } = props;
   return (
     <FormControl className={classes.formControl}>
-      <InputLabel id="demo-mutiple-checkbox-label">Cars Filter</InputLabel>
+      <Typography variant="h6"> Filter By Car Model:</Typography>
+
       <Select
-        labelId="demo-mutiple-checkbox-label"
-        id="demo-mutiple-checkbox"
         multiple
+        displayEmpty
         value={cars}
         onChange={(e) => {
           handleCarFiltering(e);
         }}
-        input={<Input value={cars} />}
-        renderValue={(selected) => selected.join(", ")}
+        input={<Input style={{ width: "300px", color: "red" }} />}
+        renderValue={(selected) => {
+          if (selected.length === 0) {
+            return (
+              <Typography color="textSecondary">No cars selected</Typography>
+            );
+          }
+
+          return selected.join(", ");
+        }}
         MenuProps={{
           getContentAnchorEl: () => null,
           style: { marginTop: 40 },
         }}
+        inputProps={{ "aria-label": "Without label" }}
       >
         <MenuItem value={"Volvo V40"}>
           <Checkbox checked={cars.indexOf("Volvo V40") > -1} />

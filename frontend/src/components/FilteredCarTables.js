@@ -29,6 +29,10 @@ const useStyles = makeStyles(() => ({
   cardContainer: {
     marginTop: "40px",
     borderRadius: "10px",
+    width: "80%",
+    marginBottom: "20px",
+    boxShadow:
+      "0 20px 20px rgba(0, 0, 0, 0.2), 0px 0px 50px rgba(0, 0, 0, 0.2)",
   },
 }));
 
@@ -38,105 +42,19 @@ const CarTables = (props) => {
   const tyrePosition = ["Front Left", "Rear Left", "Front Rigth", "Rear Rigth"];
 
   return (
-    <Card className={classes.cardContainer}>
-      <CardContent>
-        <Typography>
-          Car:{" "}
-          <Chip
-            label={car}
-            onDelete={() => handleCloseTable(car)}
-            color="secondary"
-          />
-          {/* <button onClick={() => handleCloseTable(car)}>Close Car</button> */}
-        </Typography>
-        <TableContainer className={classes.container} component={Paper}>
-          <Table
-            stickyHeader
-            className={classes.table}
-            aria-label="simple table"
-          >
-            <TableHead>
-              <TableRow>
-                <TableCell>Position</TableCell>
-                <TableCell align="right">Temperature(Last Detected)</TableCell>
-                <TableCell align="right">
-                  Angular Velocity(Last Detected)
-                </TableCell>
-                <TableCell align="right">Speed(Last Detected)</TableCell>
-                <TableCell align="right">Pressure(Last Detected)</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {tyrePosition.map((tyre, index) => (
-                <>
-                  <TableRow key={index}>
-                    <TableCell component="th" scope="row">
-                      <b>{tyre}</b>
-                    </TableCell>
-                    {carsFiltered.length > 0 &&
-                    carsFiltered.filter(
-                      (carFiltered) =>
-                        carFiltered.Car_id === car &&
-                        carFiltered.Position === tyre
-                    )[0] ? (
-                      <>
-                        <TableCell align="right">
-                          {
-                            carsFiltered.filter(
-                              (carFiltered) =>
-                                carFiltered.Car_id === car &&
-                                carFiltered.Position === tyre
-                            )[0].Temp
-                          }
-                        </TableCell>
-                        <TableCell align="right">
-                          {
-                            carsFiltered.filter(
-                              (carFiltered) =>
-                                carFiltered.Car_id === car &&
-                                carFiltered.Position === tyre
-                            )[0].Omega
-                          }
-                        </TableCell>
-                        <TableCell align="right">
-                          {
-                            carsFiltered.filter(
-                              (carFiltered) =>
-                                carFiltered.Car_id === car &&
-                                carFiltered.Position === tyre
-                            )[0].Speed
-                          }
-                        </TableCell>
-                        <TableCell align="right">
-                          {
-                            carsFiltered.filter(
-                              (carFiltered) =>
-                                carFiltered.Car_id === car &&
-                                carFiltered.Position === tyre
-                            )[0].Press
-                          }
-                        </TableCell>
-                      </>
-                    ) : (
-                      <TableCell align="right"> No Data Available</TableCell>
-                    )}
-                  </TableRow>
-                </>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
-
-        <div className={classes.flexStyling}>
-          <TableContainer
-            className={classes.container}
-            style={{
-              marginTop: "20px",
-              maxHeight: "190px",
-              width: "80%",
-            }}
-            component={Paper}
-          >
+    <div className={classes.flexStyling}>
+      <Card className={classes.cardContainer}>
+        <CardContent>
+          <Typography>
+            Car:{" "}
+            <Chip
+              label={car}
+              onDelete={() => handleCloseTable(car)}
+              color="secondary"
+            />
+            {/* <button onClick={() => handleCloseTable(car)}>Close Car</button> */}
+          </Typography>
+          <TableContainer className={classes.container} component={Paper}>
             <Table
               stickyHeader
               className={classes.table}
@@ -144,43 +62,133 @@ const CarTables = (props) => {
             >
               <TableHead>
                 <TableRow>
-                  <TableCell align="right">Position</TableCell>
-                  <TableCell align="right">Temperature</TableCell>
-                  <TableCell align="right">Angular Velocity</TableCell>
-                  <TableCell align="right">Speed</TableCell>
-                  <TableCell align="right">Pressure</TableCell>
+                  <TableCell>Position</TableCell>
+                  <TableCell align="right">
+                    Temperature(Last Detected)
+                  </TableCell>
+                  <TableCell align="right">
+                    Angular Velocity(Last Detected)
+                  </TableCell>
+                  <TableCell align="right">Speed(Last Detected)</TableCell>
+                  <TableCell align="right">Pressure(Last Detected)</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
-                {carsFiltered.length > 0 &&
-                  carsFiltered.map(
-                    (carFiltered, index) =>
-                      carFiltered.Car_id === car && (
-                        <TableRow key={index}>
+                {tyrePosition.map((tyre, index) => (
+                  <>
+                    <TableRow key={index}>
+                      <TableCell component="th" scope="row">
+                        <b>{tyre}</b>
+                      </TableCell>
+                      {carsFiltered.length > 0 &&
+                      carsFiltered.filter(
+                        (carFiltered) =>
+                          carFiltered.Car_id === car &&
+                          carFiltered.Position === tyre
+                      )[0] ? (
+                        <>
                           <TableCell align="right">
-                            {carFiltered.Position}
+                            {
+                              carsFiltered.filter(
+                                (carFiltered) =>
+                                  carFiltered.Car_id === car &&
+                                  carFiltered.Position === tyre
+                              )[0].Temp
+                            }
                           </TableCell>
                           <TableCell align="right">
-                            {carFiltered.Temp}
+                            {
+                              carsFiltered.filter(
+                                (carFiltered) =>
+                                  carFiltered.Car_id === car &&
+                                  carFiltered.Position === tyre
+                              )[0].Omega
+                            }
                           </TableCell>
                           <TableCell align="right">
-                            {carFiltered.Omega}
+                            {
+                              carsFiltered.filter(
+                                (carFiltered) =>
+                                  carFiltered.Car_id === car &&
+                                  carFiltered.Position === tyre
+                              )[0].Speed
+                            }
                           </TableCell>
                           <TableCell align="right">
-                            {carFiltered.Speed}
+                            {
+                              carsFiltered.filter(
+                                (carFiltered) =>
+                                  carFiltered.Car_id === car &&
+                                  carFiltered.Position === tyre
+                              )[0].Press
+                            }
                           </TableCell>
-                          <TableCell align="right">
-                            {carFiltered.Press}
-                          </TableCell>
-                        </TableRow>
-                      )
-                  )}
+                        </>
+                      ) : (
+                        <TableCell align="right"> No Data Available</TableCell>
+                      )}
+                    </TableRow>
+                  </>
+                ))}
               </TableBody>
             </Table>
           </TableContainer>
-        </div>
-      </CardContent>
-    </Card>
+
+          <div className={classes.flexStyling}>
+            <TableContainer
+              className={classes.container}
+              style={{
+                marginTop: "20px",
+                maxHeight: "190px",
+                width: "80%",
+              }}
+              component={Paper}
+            >
+              <Table
+                stickyHeader
+                className={classes.table}
+                aria-label="simple table"
+              >
+                <TableHead>
+                  <TableRow>
+                    <TableCell align="right">Position</TableCell>
+                    <TableCell align="right">Temperature</TableCell>
+                    <TableCell align="right">Angular Velocity</TableCell>
+                    <TableCell align="right">Speed</TableCell>
+                    <TableCell align="right">Pressure</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {carsFiltered.length > 0 &&
+                    carsFiltered.map(
+                      (carFiltered, index) =>
+                        carFiltered.Car_id === car && (
+                          <TableRow key={index}>
+                            <TableCell align="right">
+                              {carFiltered.Position}
+                            </TableCell>
+                            <TableCell align="right">
+                              {carFiltered.Temp}
+                            </TableCell>
+                            <TableCell align="right">
+                              {carFiltered.Omega}
+                            </TableCell>
+                            <TableCell align="right">
+                              {carFiltered.Speed}
+                            </TableCell>
+                            <TableCell align="right">
+                              {carFiltered.Press}
+                            </TableCell>
+                          </TableRow>
+                        )
+                    )}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </div>
+        </CardContent>
+      </Card>
+    </div>
   );
 };
 

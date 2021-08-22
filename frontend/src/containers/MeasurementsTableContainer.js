@@ -46,7 +46,6 @@ const DataTable = () => {
   useEffect(() => {
     socket.on("FromAPI", (data) => {
       if (data !== {}) {
-        console.log(data);
         setmeasurements((prev) => [data, ...prev]);
         setErrorMessage("");
       } else {
