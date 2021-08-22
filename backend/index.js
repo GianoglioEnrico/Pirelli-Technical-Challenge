@@ -4,6 +4,7 @@ const http = require("http");
 const csv = require("csv-parser");
 const cors = require("cors");
 const fs = require("fs");
+const filterApi = require("./routes/index.js");
 
 const app = express();
 const server = http.createServer(app);
@@ -13,23 +14,32 @@ const io = require("socket.io")(server, {
   },
 });
 
-// MIDDLEWARE
-app.use(cors());
-app.use(express.json());
-app.use(express.static("build"));
-const port = process.env.PORT || 4001;
-
-let measurement = [];
+let measurements = [];
 let i = 0;
 let interval;
 let response;
 
-// Reading CSV file and saving data
-fs.createReadStream("./data_measurements_finals.csv")
+// MIDDLEWARE
+app.use(cors());
+app.use(express.json());
+app.use(express.static("build"));
+app.use(
+  "/filter",
+  function (req, res, next) {
+    req.measurements = measurements;
+
+    next();
+  },
+  filterApi
+);
+const port = process.env.PORT || 4001;
+
+// Reading CSV file with stream and saving data on measurements variable
+fs.createReadStream("./mycsv.csv")
   .pipe(csv())
   .on("data", (data) => {
     if (Number(data.Press) > 0 && Number(data.Omega)) {
-      measurement.push(data);
+      measurements.push(data);
     }
   });
 
@@ -48,22 +58,14 @@ io.on("connection", (socket) => {
   });
 });
 
+// Function to send chunks of data to the Client
 const getApiAndEmit = (socket) => {
-  response = measurement[i++];
+  response = measurements[i++];
   if (response && Number(response.Omega) > 0 && Number(response.Press) > 0) {
     // Emitting a new message. It will be consumed by the client
     socket.emit("FromAPI", response);
   }
 };
-
-app.get("/filter", (req, res) => {
-  const queryFilters = req.query;
-  const filteredCar = measurement.filter((measure) => {
-    return queryFilters.car.includes(measure.Car_id);
-  });
-
-  res.json(filteredCar);
-});
 
 // Server Started
 server.listen(port, () => console.log(`Listening on port ${port}`));

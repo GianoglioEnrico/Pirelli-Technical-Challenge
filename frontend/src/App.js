@@ -1,12 +1,12 @@
 import "./App.css";
 import Header from "./containers/Header";
-import DataTable from "./containers/DataTable";
+import MeasurementsTableContainer from "./containers/MeasurementsTableContainer";
 
 function App() {
   return (
     <div className="App">
       <Header />
-      <DataTable />
+      <MeasurementsTableContainer />
     </div>
   );
 }

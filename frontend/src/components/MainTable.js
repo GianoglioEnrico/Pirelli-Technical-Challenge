@@ -28,7 +28,7 @@ const MainTable = (props) => {
             <TableCell>Car</TableCell>
             <TableCell align="right">Position</TableCell>
             <TableCell align="right">Temperature</TableCell>
-            <TableCell align="right">Omega</TableCell>
+            <TableCell align="right">Angular Velocity</TableCell>
             <TableCell align="right">Speed</TableCell>
             <TableCell align="right">Pressure</TableCell>
           </TableRow>
