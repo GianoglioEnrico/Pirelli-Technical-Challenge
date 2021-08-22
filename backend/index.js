@@ -61,7 +61,7 @@ io.on("connection", (socket) => {
 // Function to send chunks of data to the Client
 const getApiAndEmit = (socket) => {
   response = measurements[i++];
-  if (response && Number(response.Omega) > 0 && Number(response.Press) > 0) {
+  if (response) {
     // Emitting a new message. It will be consumed by the client
     socket.emit("FromAPI", response);
   }

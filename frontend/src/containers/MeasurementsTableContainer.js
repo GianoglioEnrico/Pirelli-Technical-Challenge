@@ -34,17 +34,7 @@ const DataTable = () => {
     setCars(e.target.value);
     if (e.target.value.length === 0) setFiltering(false);
     else {
-      fetch(`/filter?car=${e.target.value}`)
-        .then((res) => {
-          if (!res.ok) {
-            setErrorMessage("Filtering Error");
-          } else {
-            res.json();
-          }
-        })
-        .then(() => {
-          setFiltering(true);
-        });
+      setFiltering(true);
     }
   };
 
@@ -55,9 +45,15 @@ const DataTable = () => {
 
   useEffect(() => {
     socket.on("FromAPI", (data) => {
-      setmeasurements((prev) => [data, ...prev]);
-      setErrorMessage("");
+      if (data !== {}) {
+        console.log(data);
+        setmeasurements((prev) => [data, ...prev]);
+        setErrorMessage("");
+      } else {
+        setErrorMessage("No data received from the sensors");
+      }
     });
+
     socket.on("connect_error", () => setErrorMessage("Connection Error"));
     socket.on("connect_failed", () => setErrorMessage("Connection Failed"));
     socket.on("disconnect", () =>
@@ -72,7 +68,7 @@ const DataTable = () => {
       setFiltering(false);
     }
   };
-  console.log(filtering);
+
   return (
     <div className={classes.root}>
       {!errorMessage && (
