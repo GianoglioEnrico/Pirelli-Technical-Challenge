@@ -11,7 +11,7 @@ Try the app: https://pirelli-technical-challenge.herokuapp.com/
 
 To run the app is required to have [node](https://nodejs.org/it/) and [npm](https://www.npmjs.com/) installed on you PC.
 
-[Here](https://github.com/GianoglioEnrico/Pirelli-Technical-Challenge/blob/main/Pirelli_Technical_Challenge_Discussion.docx) you can get a brief analysis of the project and some suggestions for improving the current solution.
+[Here](https://github.com/GianoglioEnrico/Pirelli-Technical-Challenge/blob/main/Pirelli_Technical_Challenge_Discussion.pdf) you can get a brief analysis of the project and some suggestions for improving the current solution.
 
 ## Backend Installation
 
