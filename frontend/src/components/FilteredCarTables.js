@@ -52,7 +52,6 @@ const CarTables = (props) => {
               onDelete={() => handleCloseTable(car)}
               color="secondary"
             />
-            {/* <button onClick={() => handleCloseTable(car)}>Close Car</button> */}
           </Typography>
           <TableContainer className={classes.container} component={Paper}>
             <Table
