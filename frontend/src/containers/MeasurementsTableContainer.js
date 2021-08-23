@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import socketIOClient from "socket.io-client";
 import CarsFilter from "../components/CarsFilter";
 
-import MainTable from "../components/MainTable";
+import AllCarsMeasurements from "../components/AllCarsMeasurements";
 import FilteredCarTables from "../components/FilteredCarTables";
 import LoadProgress from "../components/LoadProgress";
 import Typography from "@material-ui/core/Typography";
@@ -32,6 +32,7 @@ const DataTable = () => {
   const [carsFiltered, setCarsFiltered] = useState([]);
 
   const handleCarFiltering = (e) => {
+    setCars(e.target.value);
     if (e.target.value.length === 0) {
       setFiltering(false);
       socket.off("FilterApi");
@@ -41,7 +42,7 @@ const DataTable = () => {
         console.log("Filtering...");
         setCarsFiltered(data);
       });
-      setCars(e.target.value);
+
       setFiltering(true);
     }
   };
@@ -81,7 +82,7 @@ const DataTable = () => {
         />
       )}
       {!errorMessage && !filtering && cars.length === 0 && (
-        <MainTable measurements={measurements} />
+        <AllCarsMeasurements measurements={measurements} />
       )}
 
       {filtering &&

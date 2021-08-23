@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const MainTable = (props) => {
+const AllCarsMeasurements = (props) => {
   const classes = useStyles();
   const { measurements } = props;
   return (
@@ -60,4 +60,4 @@ const MainTable = (props) => {
   );
 };
 
-export default MainTable;
+export default AllCarsMeasurements;
