@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import socketIOClient from "socket.io-client";
 import CarsFilter from "../components/CarsFilter";
 
-import AllCarsMeasurements from "../components/AllCarsMeasurements";
+import AllCarsMeasurementsTable from "../components/AllCarsMeasurementsTable";
 import FilteredCarTables from "../components/FilteredCarTables";
 import LoadProgress from "../components/LoadProgress";
 import Typography from "@material-ui/core/Typography";
@@ -82,7 +82,7 @@ const DataTable = () => {
         />
       )}
       {!errorMessage && !filtering && cars.length === 0 && (
-        <AllCarsMeasurements measurements={measurements} />
+        <AllCarsMeasurementsTable measurements={measurements} />
       )}
 
       {filtering &&

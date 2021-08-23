@@ -4,7 +4,6 @@ const http = require("http");
 const csv = require("csv-parser");
 const cors = require("cors");
 const fs = require("fs");
-const filterApi = require("./routes/index.js");
 
 const app = express();
 const server = http.createServer(app);
@@ -29,7 +28,7 @@ app.use(express.static("build"));
 const port = process.env.PORT || 4001;
 
 // Reading CSV file with stream and saving data on measurements variable
-fs.createReadStream("./mycsv.csv")
+fs.createReadStream("./data_measurements_finals.csv")
   .pipe(csv())
   .on("data", (data) => {
     if (Number(data.Press) > 0 && Number(data.Omega)) {
