@@ -29,19 +29,22 @@ const DataTable = () => {
   const [filtering, setFiltering] = useState(false);
   const [cars, setCars] = useState([]);
   const [errorMessage, setErrorMessage] = useState("");
+  const [carsFiltered, setCarsFiltered] = useState([]);
 
   const handleCarFiltering = (e) => {
-    setCars(e.target.value);
-    if (e.target.value.length === 0) setFiltering(false);
-    else {
+    if (e.target.value.length === 0) {
+      setFiltering(false);
+      socket.off("FilterApi");
+    } else {
+      socket.emit("FilterApi", e.target.value);
+      socket.on("FilterApi", (data) => {
+        console.log("Filtering...");
+        setCarsFiltered(data);
+      });
+      setCars(e.target.value);
       setFiltering(true);
     }
   };
-
-  let carsFiltered = measurements.filter((measurement) => {
-    if (cars.length > 0) return cars.includes(measurement.Car_id);
-    return [];
-  });
 
   useEffect(() => {
     socket.on("FromAPI", (data) => {
